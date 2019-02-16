@@ -7,9 +7,9 @@
 
 In this challenge/spike project, I'll apply the skills I learned in the Clima (API) tutorial and make a Bitcoin price reporter.  I'm going to revisit how to use Cocoapods, networking calls and JSON parsing.
 
-## What you will create
+## What I will create
 
-We’re going to make a Bitcoin price ticker. The app will give out the latest Bitcoin prices in all the popular, traded currencies, so you can track how well Bitcoin investments are doing on the go.
+I'm going to make a Bitcoin price ticker. The app will give out the latest Bitcoin prices in all the popular, traded currencies, so a user can track how well Bitcoin investments are doing on the go.
 
 ## My notes for future reference
 
