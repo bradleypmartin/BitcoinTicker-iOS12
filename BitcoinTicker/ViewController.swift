@@ -4,7 +4,7 @@
 //
 //  Created by Angela Yu on 23/01/2016.
 //  Copyright © 2016 London App Brewery. All rights reserved.
-//
+//  Modified by Brad Martin on 16/02/2019.
 
 import UIKit
 import SwiftyJSON
@@ -49,8 +49,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     
-    
-    
     //MARK: - Networking
     /***************************************************************/
     
@@ -71,9 +69,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             }
 
     }
-
-    
-    
     
     
     //MARK: - JSON Parsing
@@ -83,16 +78,19 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         if let tempResult = json["last"].double {
             print(tempResult)
+            updateUIwithBTCData(apiResult : tempResult)
         } else {
             print("Had a problem with BTC API result key 'last'.")
         }
         
-        //updateUIWithWeatherData()
     }
     
-
-
-
+    //MARK: - UI update
+    /***************************************************************/
+    
+    func updateUIwithBTCData(apiResult : Double) {
+        bitcoinPriceLabel.text = String(apiResult)
+    }
 
 }
 
