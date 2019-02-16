@@ -15,6 +15,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     let baseURL = "https://apiv2.bitcoinaverage.com/indices/global/ticker/BTC"
     let currencyArray = ["AUD", "BRL","CAD","CNY","EUR","GBP","HKD","IDR","ILS","INR","JPY","MXN","NOK","NZD","PLN","RON","RUB","SEK","SGD","USD","ZAR"]
     var finalURL = ""
+    var currencySymbol = ""
 
     //Pre-setup IBOutlets
     @IBOutlet weak var bitcoinPriceLabel: UILabel!
@@ -45,6 +46,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         finalURL = baseURL + currencyArray[row]
+        if let tempSymbol = getSymbol(forCurrencyCode: currencyArray[row]) {
+            currencySymbol = tempSymbol
+        }
         getBitcoinData(url: finalURL)
     }
     
@@ -89,7 +93,16 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     /***************************************************************/
     
     func updateUIwithBTCData(apiResult : Double) {
-        bitcoinPriceLabel.text = String(apiResult)
+        bitcoinPriceLabel.text = currencySymbol + String(apiResult)
+    }
+    
+    func getSymbol(forCurrencyCode code: String) -> String? {
+        let locale = NSLocale(localeIdentifier: code)
+        if locale.displayName(forKey: .currencySymbol, value: code) == code {
+            let newlocale = NSLocale(localeIdentifier: code.dropLast() + "_en")
+            return newlocale.displayName(forKey: .currencySymbol, value: code)
+        }
+        return locale.displayName(forKey: .currencySymbol, value: code)
     }
 
 }
